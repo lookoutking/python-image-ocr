@@ -5,4 +5,4 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: python src/main.py
+    command: python src/main.py && sleep infinity
