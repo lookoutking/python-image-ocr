@@ -22,5 +22,5 @@ jobs:
         env:
           IMGAE_TAG: ${{ env.GIT_TAG }}
         run: |
-          docker build -t lookoutking/image-ocr:$IMGAE_TAG .
-          docker push lookoutking/image-ocr:$IMGAE_TAG
+          docker build -t lookoutking/image-ocr:$IMAGE_TAG .
+          docker push lookoutking/image-ocr:$IMAGE_TAG
