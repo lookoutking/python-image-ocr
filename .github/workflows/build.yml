@@ -20,7 +20,7 @@ jobs:
 
       - name: Build and push Docker image
         env:
-          IMGAE_TAG: ${{ env.GIT_TAG }}
+          IMAGE_TAG: ${{ env.GIT_TAG }}
         run: |
           docker build -t lookoutking/image-ocr:$IMAGE_TAG .
           docker push lookoutking/image-ocr:$IMAGE_TAG
