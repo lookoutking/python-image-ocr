@@ -10,6 +10,7 @@ RUN pip install -r requirements.txt
 
 COPY ./data ./data
 COPY ./src ./src
+COPY ./templates ./templates
 
 EXPOSE 8000
 
