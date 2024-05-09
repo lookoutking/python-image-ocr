@@ -4,3 +4,4 @@ fastapi
 python-multipart
 uvicorn[standard]
 jinja2
+fastapi_profiler

@@ -4,12 +4,14 @@ from fastapi.templating import Jinja2Templates
 from PIL import Image
 from tesserocr import PyTessBaseAPI
 import io
-import os
+from fastapi_profiler import PyInstrumentProfilerMiddleware
 
 
 app = FastAPI()
+app.add_middleware(PyInstrumentProfilerMiddleware)
 templates = Jinja2Templates(directory="templates")
 ROOT_DATA_PATH = "./data"
+PROFILING = True
 
 
 @app.get("/", response_class=HTMLResponse)
