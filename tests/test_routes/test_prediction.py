@@ -1,3 +1,4 @@
+from unittest.mock import AsyncMock
 import pytest
 from fastapi import UploadFile
 from src.schemas.prediction import OcrRecognitionResult
@@ -16,3 +17,17 @@ async def test_post_predict(test_client):
         "label": "asdfasdfasdfasd",
         "message": "MODEL: asdfasdfasdfasd\n",
     }
+
+
+def test_none_value_error(test_client):
+    response = test_client.post("/model/predict", files={"file": None})
+    assert response.status_code == 400
+    assert "detail" in response.json()
+
+
+def test_invalid_value_error(test_client):
+    response = test_client.post(
+        "/predict", files={"file": ("filename", "invalid content", "text/plain")}
+    )
+    assert response.status_code == 404
+    assert "detail" in response.json()

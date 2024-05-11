@@ -1,3 +1,4 @@
+from http.client import HTTPException
 from fastapi import APIRouter
 from starlette.requests import Request
 from fastapi import File, UploadFile
@@ -13,6 +14,11 @@ router = APIRouter()
 async def post_predict(
     file: UploadFile = File(...), request: Request = None
 ) -> OcrRecognitionResult:
-    model: OcrRecognitionModel = request.app.state.model
-    prediction = await model.predict(file)
-    return JSONResponse(content=prediction.model_dump())
+    try:
+        model: OcrRecognitionModel = request.app.state.model
+        prediction = await model.predict(file)
+        return JSONResponse(content=prediction.model_dump())
+    except ValueError as ve:
+        raise HTTPException(status_code=400, detail=str(ve)) from ve
+    except RuntimeError as re:
+        raise HTTPException(status_code=500, detail=str(re)) from re
