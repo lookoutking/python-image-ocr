@@ -10,5 +10,7 @@ loguru
 # dev
 # dev
 pytest
+pytest-cov
+pytest-mock
 pytest-asyncio
 httpx

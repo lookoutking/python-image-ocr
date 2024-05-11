@@ -28,7 +28,7 @@ class OcrRecognitionModel:
         if match:
             return match.group(1)
         else:
-            return None
+            return ""
 
     async def _predict(self, file: UploadFile) -> OcrRecognitionResult:
         logger.debug("Predicting.")
