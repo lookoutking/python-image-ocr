@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from starlette.requests import Request
 from fastapi import File, UploadFile
+from fastapi.responses import JSONResponse
 
 from src.services.models import OcrRecognitionModel
 from src.schemas.prediction import OcrRecognitionResult
@@ -14,4 +15,4 @@ async def post_predict(
     file: UploadFile = File(...), request: Request = None
 ) -> OcrRecognitionResult:
     prediction = await model.predict(file)
-    return prediction
+    return JSONResponse(content=prediction.model_dump())

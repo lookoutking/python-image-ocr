@@ -1,6 +1,5 @@
 from loguru import logger
 from fastapi import UploadFile
-from fastapi.responses import JSONResponse
 from src.schemas.prediction import OcrRecognitionResult
 from src.core.config import ROOT_DATA_PATH
 from tesserocr import PyTessBaseAPI
@@ -31,7 +30,7 @@ class OcrRecognitionModel:
         else:
             return None
 
-    async def _predict(self, file: UploadFile):
+    async def _predict(self, file: UploadFile) -> OcrRecognitionResult:
         logger.debug("Predicting.")
         contents = await file.read()
         image = Image.open(io.BytesIO(contents))
@@ -44,4 +43,4 @@ class OcrRecognitionModel:
 
     async def predict(self, file: UploadFile) -> OcrRecognitionResult:
         prediction = await self._predict(file)
-        return JSONResponse(content=prediction.model_dump())
+        return prediction
