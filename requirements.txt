@@ -6,3 +6,9 @@ uvicorn[standard]
 jinja2
 fastapi_profiler
 loguru
+
+# dev
+# dev
+pytest
+pytest-asyncio
+httpx
