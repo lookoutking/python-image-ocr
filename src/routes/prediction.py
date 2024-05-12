@@ -16,7 +16,7 @@ async def post_predict(
     try:
         model: OcrRecognitionModel = request.app.state.model
         prediction = await model.predict(file)
-        return JSONResponse(content=prediction.model_dump())
+        return prediction
     except ValueError as ve:
         raise HTTPException(status_code=400, detail=str(ve)) from ve
     except RuntimeError as re:
