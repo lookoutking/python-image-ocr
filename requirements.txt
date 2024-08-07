@@ -6,6 +6,7 @@ uvicorn[standard]
 jinja2
 fastapi_profiler
 loguru
+opencv-python==4.5.1.48
 
 # dev
 # dev
